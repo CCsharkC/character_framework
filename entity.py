@@ -2,29 +2,15 @@ from random import uniform
 
 class Entity():
 
-    def __init__(self, **kwargs):
+    def __init__(self, *, mood_stats: dict, personality_stats: dict,
+                 name: str, ent_id: (int, str), **kwargs):
 
-        self.mood_stats = {'Mood': None}
-        """
-        Changable Stats,
-        Current supported mood stats:
+        self.mood_stats = mood_stats
+        self.personality_stats = personality_stats
 
-        Mood: Sad > 0 - 100 < Happy
-        """
+        self.name = name
+        self.ent_id = ent_id
 
-        self.personality_stats = {'Social': None,
-                                  'World': None,
-                                  'Information': None,
-                                  'Decision': None}
-        """
-        Constant Stats
-        Current supported personality stats:
-
-        Social: Introvert > 0 - 100 < Extrovert
-        World: Perceptive > 0 - 100 < Judgmental
-        Information: Sensing > 0 - 100 < Intuition
-        Decision: Thinking > 0 - 100 < Feeling
-        """
         self.statlets = {}
         self.statlets_decay = {}
 
@@ -95,9 +81,3 @@ class Entity():
         self.statlets[target] = value
         self.statlets_decay[target] = {'value': decay, 'sign': decay_sign}
         return True
-    
-if __name__ == '__main__':
-    test1 = Entity(Mood=50, Social=50, World=50, Information=50, Decision=50)
-    test2 = Entity()
-
-    print(test2.mood_stats)

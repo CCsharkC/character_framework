@@ -1,6 +1,14 @@
 from random import randint
+from entity import Entity
 
 class Action():
+
+    """
+    A class representing an action to be performed by an entity.
+    Functions:
+    roll: Rolls a randomised stat check.
+    effect: Modifies the mood of the target
+    """
 
     def __init__(self, *, perp: Entity, target: Entity):
         self.perp = perp
