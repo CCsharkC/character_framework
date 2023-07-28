@@ -10,7 +10,7 @@ class Action():
     effect: Modifies the mood of the target
     """
 
-    def __init__(self, *, perp: Entity, target: Entity):
+    def __init__(self, *, perp: Entity = None, target: Entity):
         self.perp = perp
         self.target = target
 
@@ -40,7 +40,7 @@ class Action():
                     return False
             return True
 
-    def effect(self, stat: str, value: int, statlet: dict = None):
+    def mood_effect(self, stat: str, value: int, statlet: dict = None):
         """
         Modify the given mood stat of the target by the specified value.
 
@@ -49,11 +49,12 @@ class Action():
             value (int): The value by which the mood stat should be modified.
             statlet (dict, optional): A dictionary containing information about the statlet. 
                                       Defaults to None.
-                                      {value: :int, decay: :float}.
+                                      {'value': :int, 'decay': :float, 'decay_sign': :bool}.
         """
         if stat in self.target.mood_stats:
             self.target.mood_stats[stat] += value
             if statlet is not None:
                 self.target.create_statlet(target=stat,
                                            value=statlet['value'],
-                                           decay=statlet['decay'])
+                                           decay=statlet['decay'],
+                                           decay_sign=statlet['decay_sign'])
