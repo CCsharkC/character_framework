@@ -2,9 +2,6 @@ from random import randint
 
 class Action():
 
-    perp = None
-    target = None
-
     def __init__(self, *, perp: Entity, target: Entity):
         self.perp = perp
         self.target = target
